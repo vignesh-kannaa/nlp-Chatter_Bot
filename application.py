@@ -9,20 +9,22 @@ english_bot = ChatBot(
     "Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter")
 trainer = ChatterBotCorpusTrainer(english_bot)
 
-# conversation = [
-#     "Hello",
-#     "Hey, I'm Luna. Your virtual personal navigator for this building",
-#     "That's great. What can you do?",
-#     "I can guide from your current place to your desired place within this building",
-#     "Can you navigate me to 301",
-#     "Sorry I'm currently instructed to navigate from 212 to 216 for testing purpose",
-#     "ok. I understand. Can you guide me to 212",
-#     "Sure. Please follow me to 212"
-# ]
-# trainer = ListTrainer(english_bot)
-# trainer.train(conversation)
+conversation = [
+    "Hey Luna",
+    "Hi. Your virtual personal navigator for this building",
+    "That's great. What can you do?",
+    "I can guide from your current place to your desired place within this building",
+    "Can you navigate me to 301",
+    "Sorry I'm currently instructed to navigate from 212 to 216 for testing purpose",
+    "ok. I understand. Can you guide me to 212",
+    "Sure. Please follow me to 212",
+    "Can you guide me to 214f",
+    "Ok. Follow me to 214f",
+]
+trainer = ListTrainer(english_bot)
+trainer.train(conversation)
 
-# trainer.train("chatterbot.corpus.english")
+trainer.train("chatterbot.corpus.english")
 
 
 @app.route("/")
@@ -53,7 +55,9 @@ if __name__ == "__main__":
 # conda activate pathto/venv
 # python -m pip install chatterbot==1.0.4 pytz
 # pip instal flask
+# python application.py
     # or
 # PS> python -m venv venv
 # PS> venv\Scripts\activate
 # (venv) PS> python -m pip install chatterbot==1.0.4 pytz
+# python application.py
