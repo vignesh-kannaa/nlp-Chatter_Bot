@@ -2,25 +2,28 @@ from flask import Flask, jsonify, render_template, request
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot.trainers import ListTrainer
+import json
+
 
 app = Flask(__name__)
+
+
+# Load conversation data from JSON file
+with open('training-conversation.json', 'r') as json_file:
+    conversation_data = json.load(json_file)
+
+conversation = []
+for pair in conversation_data:
+    conversation.append(pair['input'])
+    conversation.append(pair['output'])
+
+print('conversation:', conversation)
 
 english_bot = ChatBot(
     "Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter")
 trainer = ChatterBotCorpusTrainer(english_bot)
 
-conversation = [
-    "Hey Luna",
-    "Hi. Your virtual personal navigator for this building",
-    "That's great. What can you do?",
-    "I can guide from your current place to your desired place within this building",
-    "Can you navigate me to 301",
-    "Sorry I'm currently instructed to navigate from 212 to 216 for testing purpose",
-    "ok. I understand. Can you guide me to 212",
-    "Sure. Please follow me to 212",
-    "Can you guide me to 214f",
-    "Ok. Follow me to 214f",
-]
+
 trainer = ListTrainer(english_bot)
 trainer.train(conversation)
 
